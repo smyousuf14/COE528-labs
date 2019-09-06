@@ -213,6 +213,18 @@ public class Flight
             bookedSeatSuccess = true;
         }
         
-        return bookedSeatSuccess;
+        return bookedSeatSuccess;   
     }
+    
+    /*
+    * Provides a String representation of the flight class
+    *
+    *@return StringRepresentation
+    */
+    @Override
+    public String toString()
+    {
+        return "Flight " + flightNumber + ", " + origin + " to " + destination + ", " + departureTime + ", original price: " + originalPrice + "$";
+    }
+    
 }
