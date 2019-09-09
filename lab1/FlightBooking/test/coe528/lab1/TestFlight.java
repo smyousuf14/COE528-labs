@@ -24,7 +24,7 @@ public class TestFlight
     @Test
     public void testConstructor()
     {
-        lab1.Flight test1 = new lab1.Flight(1030, "Toronto", "Karachi", "03/02/99 8:50 pm", 10, 2500);
+        Flight test1 = new Flight(1030, "Toronto", "Karachi", "03/02/99 8:50 pm", 10, 2500);
         
     }
     
@@ -39,7 +39,7 @@ public class TestFlight
         
         try
         {
-            lab1.Flight test2 = new lab1.Flight(2040, "Toronto", "Toronto", "03/02/99 8:50 pm", 200, 1000);
+            Flight test2 = new Flight(2040, "Toronto", "Toronto", "03/02/99 8:50 pm", 200, 1000);
         }
         catch(IllegalArgumentException e)
         {
@@ -55,7 +55,7 @@ public class TestFlight
     @Test
     public void testAllMethods()
     {
-        lab1.Flight test3 = new lab1.Flight(1030, "Toronto", "Karachi", "03/02/99 8:50 pm", 10, 2500);
+        Flight test3 = new Flight(1030, "Toronto", "Karachi", "03/02/99 8:50 pm", 10, 2500);
         test3.bookASeat();
         System.out.println(test3);
         

@@ -34,4 +34,83 @@ public class Ticket
     
     // Setter methods
     
+    /*
+    * Set the passenger value
+    *
+    *@param passenger The passenger of this ticket
+    */
+    public void setPassenger(Passenger passenger)
+    {
+        this.passenger = passenger;
+    }
+    
+    /*
+    * Set the value of the flight.
+    *
+    *@param flight The flight associated with this ticket
+    */
+    public void setFlight(Flight flight)
+    {
+        this.flight = flight;
+    }
+    
+    /*
+    * Set the price value
+    *
+    *@param price The price of this ticket
+    */
+    public void setPrice(double price)
+    {
+        this.price = price;
+    }
+    
+    // Getter methods
+    
+    /*
+    * Get the value of passenger
+    *
+    *@return passenger
+    */
+    public Passenger getPassenger()
+    {
+        return passenger;
+    }
+    
+    /*
+    * Get the flight of this ticket
+    *
+    *@return flight
+    */
+    public Flight getFlight()
+    {
+        return flight;
+    }
+    
+    /*
+    * Get the price of this ticket
+    *
+    *@return price
+    */
+    public double getPrice()
+    {
+        return price;
+    }
+    
+    /*
+    * A string representation of the Ticket class
+    *
+    *@return stringRepresentation
+    */
+    public String toString()
+    {
+        return passenger + ", " + flight.getFlightNumber() + ", " + flight.getOrigin() + " to " + flight.getDestination() 
+              + ", "   + flight.getDepartureTime() + ", original price: " + flight.getOriginalPrice() + ", ticket price: $" + flight.getOriginalPrice();
+    }
+    
+    public static void main(String[]args)
+    {
+        Flight test1 = new Flight(1030, "Toronto", "Karachi", "03/02/99 8:50 pm", 10, 2500);
+        //test this class
+    }
+    
 }
