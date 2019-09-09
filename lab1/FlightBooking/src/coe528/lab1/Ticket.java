@@ -13,8 +13,9 @@ public class Ticket
     private Passenger passenger;
     private Flight flight;
     private double price;
+    private int number = 0;
     
-    private static int number = 0;
+    private static int numberOfTickets = 0;
     
     // Constructors
     /*
@@ -29,7 +30,11 @@ public class Ticket
         // Initilize the instance variables
         passenger = p;
         this.flight = flight;
-        this.price = price; 
+        this.price = price;
+        
+        // Set the ticket number
+        numberOfTickets++;
+        number = numberOfTickets;
     }
     
     // Setter methods
@@ -64,6 +69,17 @@ public class Ticket
         this.price = price;
     }
     
+    /*
+    * Set the value of the number
+    *
+    *@param number The new value of number
+    */
+    public void setNumber(int number)
+    {
+        this.number = number;
+    }
+    
+    
     // Getter methods
     
     /*
@@ -97,20 +113,31 @@ public class Ticket
     }
     
     /*
+    * Get the value of number
+    *
+    *@return number
+    */
+    public int getNumber()
+    {
+        return number;
+    }
+    
+    /*
     * A string representation of the Ticket class
     *
     *@return stringRepresentation
     */
     public String toString()
     {
-        return passenger + ", " + flight.getFlightNumber() + ", " + flight.getOrigin() + " to " + flight.getDestination() 
+        return passenger.getName() + ", " + flight.getFlightNumber() + ", " + flight.getOrigin() + " to " + flight.getDestination() 
               + ", "   + flight.getDepartureTime() + ", original price: " + flight.getOriginalPrice() + ", ticket price: $" + flight.getOriginalPrice();
     }
     
     public static void main(String[]args)
     {
         Flight test1 = new Flight(1030, "Toronto", "Karachi", "03/02/99 8:50 pm", 10, 2500);
-        //test this class
+        // Test this ...
+        
     }
     
 }

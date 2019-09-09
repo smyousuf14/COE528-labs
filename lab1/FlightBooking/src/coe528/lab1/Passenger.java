@@ -29,4 +29,52 @@ public abstract class Passenger
     
     // Getter methods 
     
+    /*
+    * Get the name of the passenger
+    *
+    *@return name
+    */
+    public String getName()
+    {
+        return name;
+    }
+    
+    /*
+    * Get the age of the passenger
+    *
+    *@return age
+    */
+    public int getAge()
+    {
+        return age;
+    }
+    
+    // Setter methods 
+    
+    /*
+    * Sets the value of name
+    *
+    *@param name The name of the passenger
+    */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+    
+    /*
+    * Sets the value of age
+    *
+    *@param age The age of the passenger
+    */
+    public void setAge(int age)
+    {
+        this.age = age;
+    }
+    
+    /*
+    * Apply the discount to this ticket. In the subclasses, the overrided method will return a
+    * price after applying the discount.
+    */
+    public abstract double applyDiscount(double p);
+
 }
