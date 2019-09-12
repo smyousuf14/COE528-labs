@@ -74,6 +74,8 @@ public abstract class Passenger
     /*
     * Apply the discount to this ticket. In the subclasses, the overrided method will return a
     * price after applying the discount.
+    *
+    *@param p The price of the ticket
     */
     public abstract double applyDiscount(double p);
 

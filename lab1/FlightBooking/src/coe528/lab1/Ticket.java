@@ -133,11 +133,4 @@ public class Ticket
               + ", "   + flight.getDepartureTime() + ", original price: " + flight.getOriginalPrice() + ", ticket price: $" + flight.getOriginalPrice();
     }
     
-    public static void main(String[]args)
-    {
-        Flight test1 = new Flight(1030, "Toronto", "Karachi", "03/02/99 8:50 pm", 10, 2500);
-        // Test this ...
-        
-    }
-    
 }
