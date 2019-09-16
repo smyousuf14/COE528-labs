@@ -19,8 +19,37 @@ public class Flight
     private int numberOfSeatsLeft;
     private double originalPrice;
     
+    // Constructors
+    
     /*
-    * Default Constructor which initializes six of the instance variables.
+    * Default constructor which does not take any values and sets each instance variable with
+    * a default value except the flight number. 
+    *
+    *@param flightNumber The unique flight number of this flight 
+    */
+    public Flight(int flightNumber)
+    {
+        // Initialize all the instance variables
+        this.flightNumber = flightNumber;
+        this.origin = "Toronto";
+        this.destination = "Karachi";
+        this.departureTime = "03/02/99 8:50 pm";
+        this.capacity = 5;
+        this.originalPrice = 12000;
+        
+        // Initialize numberOfSeatsLeft
+        numberOfSeatsLeft = capacity;
+        
+        // Check for errors
+        if(origin.equals(destination))
+        {
+            throw new IllegalArgumentException("Origin and destination can not be same.");
+        }
+    }
+    
+    
+    /*
+    * Constructor which initializes six of the instance variables.
     *
     *@param flightNumber The flight number
     *@param origin Where the flight will start from
@@ -49,7 +78,8 @@ public class Flight
         }
     }
     
-    // Getters
+    
+    // All getters
     
     /*
     * Gets flightNumber
@@ -179,7 +209,7 @@ public class Flight
     *
     *@param numberOfSeatsLeft
     */
-    public void numberOfSeatsLeft(int numberOfSeatsLeft)
+    public void setNumberOfSeatsLeft(int numberOfSeatsLeft)
     {
         this.numberOfSeatsLeft = numberOfSeatsLeft;
     }

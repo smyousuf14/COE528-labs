@@ -130,7 +130,7 @@ public class Ticket
     public String toString()
     {
         return passenger.getName() + ", " + flight.getFlightNumber() + ", " + flight.getOrigin() + " to " + flight.getDestination() 
-              + ", "   + flight.getDepartureTime() + ", original price: " + flight.getOriginalPrice() + ", ticket price: $" + flight.getOriginalPrice();
+              + ", "   + flight.getDepartureTime() + ", original price: " + flight.getOriginalPrice() + ", ticket price: $" + price;
     }
     
 }
