@@ -13,27 +13,38 @@ public class Palindrome
 {
     
     // Requires: a can not be null and a can not be empty
-    // Effects: Checks if the string is a palindrome and return true if it is.    
+    // Effects: Checks if the string is a palindrome and return true if it is. Otherwise it returns false.    
     public static boolean isPalindrome(String a)
     {
-        // Local Variables
-        int indexNumber;
-        
-        int length = a.length();
+        // First make sure that the conditions are meet for the input, if they are not meet, return false regardless. 
+        boolean terminateProgram = false;
         boolean APalindrome = true;
         
-        // Now lets find the reversal of A.
-        for(indexNumber = 0; indexNumber < length; indexNumber++)
+        if(a == null || a.length() == 0)
         {
-            if(a.substring(indexNumber,indexNumber + 1).equals(a.substring(length - indexNumber - 1, length - indexNumber) ))
-           {
-               // nothing         
-           }
-           else
-           {
-               APalindrome = false;
-           }     
+            terminateProgram = true;
+            APalindrome = false;
         }
+        else
+        {
+            // Local Variables
+            int indexNumber;
+            int length = a.length();
+
+            // Now lets find the reversal of A.
+            for(indexNumber = 0; indexNumber < length; indexNumber++)
+            {
+                if(a.substring(indexNumber,indexNumber + 1).equals(a.substring(length - indexNumber - 1, length - indexNumber) ))
+               {
+                   // nothing         
+               }
+               else
+               {
+                   APalindrome = false;
+               }     
+            }
+        }
+        
         
         return APalindrome;
     }

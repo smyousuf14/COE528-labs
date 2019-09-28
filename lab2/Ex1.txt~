@@ -1,4 +1,4 @@
-//Requires: a is not null and b is not null
+ //Requires: a is not null and b is not null
 
 //Modifies: The max (largest) value of a
 
