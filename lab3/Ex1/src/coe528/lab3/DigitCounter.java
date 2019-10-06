@@ -17,10 +17,11 @@ public class DigitCounter extends AbstractCounter
      * 
      * @param Counter The initial value of the counter.
     */
-    public DigitCounter(int Counter)
+    public DigitCounter(int counter)
     {
-        this.counter = Counter;
+        this.counter = counter;
     }
+    
     
     
 }

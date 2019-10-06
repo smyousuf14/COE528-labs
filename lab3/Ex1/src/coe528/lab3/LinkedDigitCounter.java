@@ -16,10 +16,12 @@ public class LinkedDigitCounter extends AbstractCounter
      * Default constructor to create a linked digit counter,
      * 
      * @param Counter The value the counter should be set to.
+     * @param LeftCounter The left counter it is connected to.
      */
-    public LinkedDigitCounter(int Counter)
+    public LinkedDigitCounter(int counter, Counter LeftCounter)
     {
-        this.counter = Counter;
+        this.counter = counter;
+        this.leftNeighbour = LeftCounter;
     }
     
     // Getter methods
@@ -33,7 +35,5 @@ public class LinkedDigitCounter extends AbstractCounter
     {
         return leftNeighbour;
     }
-    
-    
     
 }
