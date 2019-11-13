@@ -142,18 +142,33 @@ public class Manager
     
     
     /**
-     * Deletes a customer.
+     * @Effects: Deletes a customer.
      * 
      * 
      */
-    public void deleteCustomer()
+    public void deleteCustomer(Customer customer, String username)
     {
+        File Customer = new File("" + username + ".txt");
+        Customer.delete();
         
+        // Delete the object by giving it a null reference
+        customer = null;
     }
     
     public static void main(String[]args)
     {
+        try
+        {
         Manager m = new Manager();
         m.addCustomer("Abdullah", "4321");
+        
+        Customer m2 = new Customer("Abdullah", "4321");
+        
+        m.deleteCustomer(m2, "Abdullah");
+        }
+        catch(Exception e)
+        {
+            
+        }
     }
 }
