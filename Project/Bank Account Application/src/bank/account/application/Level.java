@@ -5,19 +5,28 @@ package bank.account.application;
  * 
  * @author Syed Yousuf
  */
-public interface Level 
+public abstract class Level 
 {
     // List of abstract methods
+    protected String status;
+    protected int Fee;
     
     /**
      * 
-     * @Effects: Adds specified amount of money.
+     * @Effects: Gets the status of this level.
      */
-    public void addMoney(double money);
+    public abstract String getStatus();
     
     /**
      * 
-     * @Effects: Removes specified amount of money.
+     * @Effects: Gets the Fee of this level.
      */
-    public void useMoney(double money);
+    public abstract int getFee();
+    
+    /**
+     * Set current Level to this level.
+     * 
+     * @Effects: Sets the current level to this level.
+     */
+    public abstract void setLevel(Customer customer);
 }

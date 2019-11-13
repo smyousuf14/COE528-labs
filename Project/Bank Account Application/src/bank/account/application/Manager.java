@@ -1,5 +1,8 @@
 package bank.account.application;
 
+import java.io.*;
+import java.util.Scanner;
+
 /**
  * A Manager manages the customer accounts in the bank application.
  * 
@@ -76,7 +79,7 @@ public class Manager
     public void login(String username, String password)
     {
         // Validate the username and password.
-        if(this.Username.equals(username) && this.Password.equals(password))
+        if(this.Username.equals(username) && this.Password.equals(password) && this.Role.equals("manager"))
         {
             successfulLogin = true;
         }
@@ -97,13 +100,44 @@ public class Manager
     }
     
     /**
-     * Adds a customer.
+     * @Effects: Adds a customer.
      * 
      * 
      */
-    public void addCustomer()
+    public void addCustomer(String username, String password)
     {
-        
+        try
+        {
+            // create a new file 
+            File CustomerFile = new File("" + username + ".txt");
+            CustomerFile.createNewFile();
+
+            FileWriter Write = new FileWriter("" + username + ".txt");
+            Write.write("" + username);
+            
+            // new line
+            Write.write(System.getProperty( "line.separator" ));
+            
+            Write.write("" + password);
+            
+             // new line
+            Write.write(System.getProperty( "line.separator" ));
+            
+            Write.write("customer");
+            
+             // new line
+            Write.write(System.getProperty( "line.separator" ));
+            
+            Write.write("100");
+            
+            
+            // Close the file
+            Write.close();
+        }
+        catch(IOException e)
+        {
+            
+        }
     }
     
     
@@ -115,5 +149,11 @@ public class Manager
     public void deleteCustomer()
     {
         
+    }
+    
+    public static void main(String[]args)
+    {
+        Manager m = new Manager();
+        m.addCustomer("Abdullah", "4321");
     }
 }

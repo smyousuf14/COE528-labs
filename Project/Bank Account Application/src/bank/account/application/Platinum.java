@@ -1,31 +1,26 @@
 package bank.account.application;
 
 /**
- * A silver level customer is the lowest level a customer can be. Only customers
- * that have less than a $10 000 are at this level. The fee that must be paid when 
- * an online purchase is made is 20 dollars with this level.
+ * A Platinum level customer does not have to pay any fees.
  * 
  * @author Syed Yousuf
  */
-public class Silver extends Level
+public class Platinum extends Level
 {
-    // Instance Variables
+    // Instance Variable List
     
-    
-    // Constructor methods
+    // Constructors
     
     /**
-     * A default constructor for creating Silver level objects.
+     * A default constructor for creating Platinum level objects.
      * 
-     * @Effects: Creates a Silver Level object with default values.
+     * @Effects: Creates a Platinum Level object with default values.
      */
-    public Silver()
+    public Platinum()
     {
-        status = "Silver";
-        Fee = 20;
+        status = "Platinum";
+        Fee  = 0;
     }
-    
-    // Other methods
     
     /**
      * 
@@ -55,7 +50,8 @@ public class Silver extends Level
     @Override
     public void setLevel(Customer customer)
     {
-        customer.currentLevel = new Silver();
+        customer.currentLevel = new Platinum();
     }
+    
     
 }

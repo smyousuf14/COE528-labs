@@ -1,5 +1,8 @@
 package bank.account.application;
 
+import java.io.*;
+import java.util.Scanner;
+
 /**
  * Each Customer file contains the information of a customer.
  * 
@@ -11,6 +14,7 @@ public class CustomerFile
     private String username;
     private String password;
     private String role;
+    private double AccountBalance;
     
     // Constructor(s)
     
@@ -19,11 +23,19 @@ public class CustomerFile
      * 
      * @Effects: Creates a default value CustomerFile
      */
-    public CustomerFile(String username, String password, String role)
+    public CustomerFile(String username) throws FileNotFoundException
     {
-        this.username = username;
-        this.password = password;
-        this.role = role;
+        // Get the file by its username.
+        File thisFile = new File("" + username + ".txt");
+        Scanner reader = new Scanner(thisFile);
+        
+        this.username = reader.nextLine();
+        this.password = reader.nextLine();
+        this.role = reader.nextLine();
+        this.AccountBalance = Double.parseDouble(reader.nextLine());
+        
+        // Close the reader
+        reader.close();
     }
     
     // Getter and Setter methods.
@@ -54,5 +66,13 @@ public class CustomerFile
     public String getRole() 
     {
         return role;
+    }
+    
+    /**
+     * @Effects: Get the Account Balance
+     */
+    public double getAccountBalance()
+    {
+        return AccountBalance;
     }
 }

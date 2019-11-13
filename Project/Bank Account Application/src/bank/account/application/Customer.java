@@ -1,5 +1,6 @@
 package bank.account.application;
 
+import java.io.*;
 /**
  * A Customer has a specific mutable balance in their account
  * and can have any three level of membership. This class, although called customer
@@ -14,6 +15,7 @@ public class Customer
     private double AccountBalance;
     private CustomerFile customerFile;
     private boolean SuccessfulLogin;
+    protected Level currentLevel;
     
     // Constructor(s)
     
@@ -22,10 +24,15 @@ public class Customer
      * 
      * @Effects: Creates a Customer account with zero balance.
      */
-    public Customer(String username, String password)
+    public Customer(String username, String password) throws FileNotFoundException
     {
-        AccountBalance = 0;
-        customerFile = new CustomerFile(username, password, "customer");
+        // First load the specifed file.   
+        customerFile = new CustomerFile(username);
+        
+        // Set the account balance.
+        this.AccountBalance = 0;
+        addMoney(customerFile.getAccountBalance());
+        
         SuccessfulLogin = false;
     }
     
@@ -51,6 +58,24 @@ public class Customer
         return this.AccountBalance;
     }
     
+    /**
+     * 
+     * @Effects: Get the level of this customer
+     */
+    public Level getLevel()
+    {
+        return currentLevel;
+    }
+    
+    /**
+     * 
+     * @Effects: Get the customer file which has all the info for this customer.
+     */
+    public CustomerFile getCustomerFile()
+    {
+        return customerFile;
+    }
+    
     // Other methods
     
     /**
@@ -62,7 +87,7 @@ public class Customer
     public void login(String username, String password)
     {
         // Check if the username and passwords match.
-        if(this.customerFile.getUsername().equals(username) && this.customerFile.getPassword().equals(password))
+        if(this.customerFile.getUsername().equals(username) && this.customerFile.getPassword().equals(password) && this.customerFile.getRole().equals("customer"))
         {
             // Set the successful flag on.
             SuccessfulLogin = true;
@@ -84,4 +109,90 @@ public class Customer
         SuccessfulLogin = false;
     }
     
+    /**
+     * 
+     * @Effects: Adds the specified amount of money to this customer's balance.
+     */
+    public void addMoney(double money)
+    {
+        // Add the money
+        AccountBalance  = AccountBalance + money;
+        
+        // Checks to see if the customer's level has change or not.
+        if(AccountBalance < 10000)
+        {
+            // Silver level.
+            currentLevel = new Silver();
+            
+        }
+        else
+        if(AccountBalance >= 10000 && AccountBalance < 20000)
+        {
+            // Gold Level.
+            currentLevel = new Gold();
+        }
+        else
+        if(AccountBalance >= 20000)
+        {
+            // Platinum Level.
+            currentLevel = new Platinum();
+        }
+    }
+    
+    /**
+     * 
+     * @Effects: Remove specified amount of money from this customer's balance.
+     */
+    public void useMoney(double money)
+    {
+        AccountBalance = AccountBalance - money - currentLevel.getFee();
+        
+        // Checks to see if the customer's level has change or not.
+        if(AccountBalance < 10000)
+        {
+            // Silver level.
+            currentLevel = new Silver();
+            
+        }
+        else
+        if(AccountBalance >= 10000 && AccountBalance < 20000)
+        {
+            // Gold Level.
+            currentLevel = new Gold();
+        }
+        else
+        if(AccountBalance >= 20000)
+        {
+            // Platinum Level.
+            currentLevel = new Platinum();
+        }
+    }
+    
+    public static void main(String[]args)
+    {
+        try
+        {
+        Customer c = new Customer("yousuf" , "123");
+        
+        System.out.println(c.getAccountBalance());
+        System.out.println(c.getLevel().getStatus());
+        
+        c.addMoney(100);
+        
+        System.out.println(c.getAccountBalance());
+        System.out.println(c.getLevel().getStatus());
+        
+        c.useMoney(1);
+        
+        System.out.println(c.getAccountBalance());
+        System.out.println(c.getLevel().getStatus());
+        
+        System.out.println(c.getCustomerFile().getRole());
+        
+        }
+        catch(FileNotFoundException e)
+        {
+            System.err.println("username not correct");
+        }
+    }
 }
