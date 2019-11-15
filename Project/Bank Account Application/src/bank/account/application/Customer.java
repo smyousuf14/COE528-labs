@@ -76,6 +76,14 @@ public class Customer
         return customerFile;
     }
     
+    /**
+     * @Effects: Get if the log in was successful or not.
+     */
+    public boolean getSuccessfulLogin()
+    {
+        return this.SuccessfulLogin;
+    }
+    
     // Other methods
     
     /**
@@ -118,6 +126,10 @@ public class Customer
         // Add the money
         AccountBalance  = AccountBalance + money;
         
+        // Update that info
+        customerFile.setAccountBalance(this.AccountBalance);
+        customerFile.updateAccountInfo();
+        
         // Checks to see if the customer's level has change or not.
         if(AccountBalance < 10000)
         {
@@ -140,12 +152,49 @@ public class Customer
     }
     
     /**
+     * This is to make online purchases.
      * 
-     * @Effects: Remove specified amount of money from this customer's balance.
+     * @Effects: Remove specified amount of money from this customer's balance by making a purchase.
      */
     public void useMoney(double money)
     {
         AccountBalance = AccountBalance - money - currentLevel.getFee();
+        
+        // Update that info
+        customerFile.setAccountBalance(this.AccountBalance);
+        customerFile.updateAccountInfo();
+        
+        // Checks to see if the customer's level has change or not.
+        if(AccountBalance < 10000)
+        {
+            // Silver level.
+            currentLevel = new Silver();
+            
+        }
+        else
+        if(AccountBalance >= 10000 && AccountBalance < 20000)
+        {
+            // Gold Level.
+            currentLevel = new Gold();
+        }
+        else
+        if(AccountBalance >= 20000)
+        {
+            // Platinum Level.
+            currentLevel = new Platinum();
+        }
+    }
+    
+    /**
+     * @Effects: Withdraw specified money.
+     */
+    public void withdrawMoney(double money)
+    {
+        AccountBalance = AccountBalance - money;
+        
+        // Update that info
+        customerFile.setAccountBalance(this.AccountBalance);
+        customerFile.updateAccountInfo();
         
         // Checks to see if the customer's level has change or not.
         if(AccountBalance < 10000)

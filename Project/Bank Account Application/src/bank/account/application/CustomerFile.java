@@ -75,4 +75,49 @@ public class CustomerFile
     {
         return AccountBalance;
     }
+    
+    /**
+     * @Effects: Sets the account balance.
+     */
+    public void setAccountBalance(double accountBalance)
+    {
+        this.AccountBalance = accountBalance;
+    }
+    
+    // Other methods
+    
+    /**
+     * @Effects: Updates the account info instance variables.
+     */
+    public void updateAccountInfo()
+    {
+        File CustomerFile = new File("" + username + ".txt");
+        try{
+            FileWriter Write = new FileWriter("" + username + ".txt");
+            Write.write("" + this.username);
+            
+            // new line
+            Write.write(System.getProperty( "line.separator" ));
+            
+            Write.write("" + this.password);
+            
+             // new line
+            Write.write(System.getProperty( "line.separator" ));
+            
+            Write.write("customer");
+            
+             // new line
+            Write.write(System.getProperty( "line.separator" ));
+            
+            Write.write("" + this.AccountBalance);
+            
+            
+            // Close the file
+            Write.close();
+        }
+        catch(IOException e)
+        {
+            
+        }
+    }
 }
