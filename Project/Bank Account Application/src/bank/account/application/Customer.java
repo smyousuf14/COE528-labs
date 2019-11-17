@@ -2,10 +2,16 @@ package bank.account.application;
 
 import java.io.*;
 /**
- * A Customer has a specific mutable balance in their account
+ * Overview: A Customer has a specific mutable balance in their account
  * and can have any three level of membership. This class, although called customer
- * refers to the bank account that a specific customer has. 
+ * refers to the bank account that a specific customer has. This class is mutable, since all 
+ * its instance variables can be changed.
  * 
+ * Abstract Function: 
+ * AF(r) = r.customerFile.userName + r.customerFile.password + r.currentLevel
+ * 
+ * Rep Invariant:
+ * RI(r) = r.username != NULL && r.password != null 
  * 
  * @author Syed Yousuf
  */
@@ -22,7 +28,8 @@ public class Customer
     /**
      * Creates a Customer account with no balance.
      * 
-     * @Effects: Creates a Customer account with zero balance.
+     * Effects: Creates a Customer account with zero balance.
+     * Requires: username and password is not null
      */
     public Customer(String username, String password) throws FileNotFoundException
     {
@@ -39,7 +46,8 @@ public class Customer
     /**
      * Creates a Customer account with specified initial values.
      * 
-     * @Effects: Creates a customer object with specified values.
+     * Effects: Creates a customer object with specified values.
+     * Requires: accountBalance is a real number, not a String
      */
     public Customer(double accountBalance)
     {
@@ -51,7 +59,7 @@ public class Customer
     /**
      * Get account balance.
      * 
-     * @Effects: Get the account balance.
+     * Effects: Get the account balance.
      */
     public double getAccountBalance()
     {
@@ -59,8 +67,9 @@ public class Customer
     }
     
     /**
+     * Get the level of this customer.
      * 
-     * @Effects: Get the level of this customer
+     * Effects: Get the level of this customer
      */
     public Level getLevel()
     {
@@ -68,8 +77,9 @@ public class Customer
     }
     
     /**
+     * Get the Customer File.
      * 
-     * @Effects: Get the customer file which has all the info for this customer.
+     * Effects: Get the customer file which has all the info for this customer.
      */
     public CustomerFile getCustomerFile()
     {
@@ -77,7 +87,9 @@ public class Customer
     }
     
     /**
-     * @Effects: Get if the log in was successful or not.
+     * Get the success rate.
+     * 
+     * Effects: Get if the log in was successful or not.
      */
     public boolean getSuccessfulLogin()
     {
@@ -90,7 +102,8 @@ public class Customer
      * Login the customer to their account if the username and 
      * password are valid.
      * 
-     * @Effects: Checks if the username and password match and sets the success flag respectively.
+     * Effects: Checks if the username and password match and sets the success flag respectively.
+     * Requires: username and password must not be null.
      */
     public void login(String username, String password)
     {
@@ -110,7 +123,7 @@ public class Customer
     /**
      * Logs out the Customer from their account.
      * 
-     * @Effects: Sets the successful flag to false.
+     * Effects: Sets the successful flag to false.
      */
     public void logout()
     {
@@ -118,8 +131,11 @@ public class Customer
     }
     
     /**
+     * Add money to the customer's balance.
      * 
-     * @Effects: Adds the specified amount of money to this customer's balance.
+     * Effects: Adds the specified amount of money to this customer's balance.
+     * Requires: money must be a positive value.
+     * 
      */
     public void addMoney(double money)
     {
@@ -152,41 +168,57 @@ public class Customer
     }
     
     /**
-     * This is to make online purchases.
+     * This is to make online purchases. Online purchases must be 50 dollars or more in order
+     * to make the purchase.
      * 
-     * @Effects: Remove specified amount of money from this customer's balance by making a purchase.
+     * Effects: Remove specified amount of money from this customer's balance by making a purchase.
+     * Requires: money must be a positive value.
      */
     public void useMoney(double money)
     {
-        AccountBalance = AccountBalance - money - currentLevel.getFee();
-        
-        // Update that info
-        customerFile.setAccountBalance(this.AccountBalance);
-        customerFile.updateAccountInfo();
-        
-        // Checks to see if the customer's level has change or not.
-        if(AccountBalance < 10000)
+        // Check if the money is 50 dollars or more. 
+        if(money >= 50)
         {
-            // Silver level.
-            currentLevel = new Silver();
             
+        
+            AccountBalance = AccountBalance - money - currentLevel.getFee();
+
+            // Update that info
+            customerFile.setAccountBalance(this.AccountBalance);
+            customerFile.updateAccountInfo();
+
+            // Checks to see if the customer's level has change or not.
+            if(AccountBalance < 10000)
+            {
+                // Silver level.
+                currentLevel = new Silver();
+
+            }
+            else
+            if(AccountBalance >= 10000 && AccountBalance < 20000)
+            {
+                // Gold Level.
+                currentLevel = new Gold();
+            }
+            else
+            if(AccountBalance >= 20000)
+            {
+                // Platinum Level.
+                currentLevel = new Platinum();
+            }
+        
         }
         else
-        if(AccountBalance >= 10000 && AccountBalance < 20000)
         {
-            // Gold Level.
-            currentLevel = new Gold();
-        }
-        else
-        if(AccountBalance >= 20000)
-        {
-            // Platinum Level.
-            currentLevel = new Platinum();
+            // If it isnt 50 dollars or more, then do nothing!
         }
     }
     
     /**
-     * @Effects: Withdraw specified money.
+     * Withdraw the specified amount of money from this customer's account.
+     * 
+     * Effects: Withdraw specified money.
+     * Requires: money must be a positive value
      */
     public void withdrawMoney(double money)
     {
@@ -217,31 +249,34 @@ public class Customer
         }
     }
     
-    public static void main(String[]args)
+    /**
+     * Provides the String representation of this class
+     * 
+     * Effects: Returns a string representation of this class
+     * 
+     * @return A string representation
+     */
+    @Override
+    public String toString()
     {
-        try
+        return "username: " + this.customerFile.getUsername() + " password: " + this.customerFile.getPassword() + this.currentLevel;
+    }
+    
+    
+    /**
+     * Checks if this class is represented properly.
+     * 
+     * Effect: Returns true if the class is represented properly, in other words if the account balance isn't null.
+     */
+    public boolean RepOk()
+    {
+        if(this.customerFile.getUsername() != null && this.customerFile.getPassword() != null)
         {
-        Customer c = new Customer("yousuf" , "123");
-        
-        System.out.println(c.getAccountBalance());
-        System.out.println(c.getLevel().getStatus());
-        
-        c.addMoney(100);
-        
-        System.out.println(c.getAccountBalance());
-        System.out.println(c.getLevel().getStatus());
-        
-        c.useMoney(1);
-        
-        System.out.println(c.getAccountBalance());
-        System.out.println(c.getLevel().getStatus());
-        
-        System.out.println(c.getCustomerFile().getRole());
-        
+            return true;
         }
-        catch(FileNotFoundException e)
+        else 
         {
-            System.err.println("username not correct");
+            return false;
         }
     }
-}
+}  

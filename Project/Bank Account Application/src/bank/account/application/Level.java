@@ -13,20 +13,20 @@ public abstract class Level
     
     /**
      * 
-     * @Effects: Gets the status of this level.
+     * Effects: Gets the status of this level.
      */
     public abstract String getStatus();
     
     /**
      * 
-     * @Effects: Gets the Fee of this level.
+     * Effects: Gets the Fee of this level.
      */
     public abstract int getFee();
     
     /**
      * Set current Level to this level.
      * 
-     * @Effects: Sets the current level to this level.
+     * Effects: Sets the current level to this level.
      */
     public abstract void setLevel(Customer customer);
 }

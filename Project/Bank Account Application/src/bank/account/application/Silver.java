@@ -17,7 +17,7 @@ public class Silver extends Level
     /**
      * A default constructor for creating Silver level objects.
      * 
-     * @Effects: Creates a Silver Level object with default values.
+     * Effects: Creates a Silver Level object with default values.
      */
     public Silver()
     {
@@ -29,7 +29,7 @@ public class Silver extends Level
     
     /**
      * 
-     * @Effects: Gets the status of this level.
+     * Effects: Gets the status of this level.
      */
     @Override
     public String getStatus()
@@ -39,7 +39,7 @@ public class Silver extends Level
     
     /**
      * 
-     * @Effects: Gets the Fee of this level.
+     * Effects: Gets the Fee of this level.
      */
     @Override
     public int getFee()
@@ -50,7 +50,7 @@ public class Silver extends Level
     /**
      * Set current Level to this level.
      * 
-     * @Effects: Sets the current level to this level.
+     * Effects: Sets the current level to this level.
      */
     @Override
     public void setLevel(Customer customer)

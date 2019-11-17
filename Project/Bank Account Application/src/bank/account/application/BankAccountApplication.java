@@ -145,8 +145,15 @@ public class BankAccountApplication extends Application
                             // Check if the enter button has been pressed.
                             send.setOnAction(button  ->
                             {
-                                customer.addMoney(Double.parseDouble(enterValue.getText()));
-                                
+                                // Make sure that the money being deposited is positive
+                                if(Double.parseDouble(enterValue.getText()) >= 0)
+                                {
+                                    customer.addMoney(Double.parseDouble(enterValue.getText()));
+                                }
+                                else
+                                {
+                                    // do nothing if its negative.
+                                }
                                 // Update level.
                                 bottomValue.setText("LEVEL: " + customer.getLevel().getStatus());
                             });
@@ -172,8 +179,15 @@ public class BankAccountApplication extends Application
                             // Check if the enter button has been pressed.
                             send.setOnAction(button  ->
                             {
-                                customer.withdrawMoney(Double.parseDouble(enterValue.getText()));
-                                
+                                // Make sure the money to withdraw is positive.
+                                if(Double.parseDouble(enterValue.getText()) >= 0)
+                                {
+                                    customer.withdrawMoney(Double.parseDouble(enterValue.getText()));
+                                }
+                                else
+                                {
+                                    // do nothing if its negative
+                                }
                                 // Update level.
                                 bottomValue.setText("LEVEL: " + customer.getLevel().getStatus());
                             });
@@ -198,8 +212,16 @@ public class BankAccountApplication extends Application
                             // Check if the enter button has been pressed.
                             send.setOnAction(button  ->
                             {
-                                customer.useMoney(Double.parseDouble(enterValue.getText()));
-                                
+                                // Make sure that the money is positve
+                                if(Double.parseDouble(enterValue.getText()) >= 0)
+                                {
+                                    customer.useMoney(Double.parseDouble(enterValue.getText()));
+                                }
+                                else
+                                {
+                                    //If the money that the customer is adding is not positive
+                                    // then do nothing
+                                }
                                 // Update level.
                                 bottomValue.setText("LEVEL: " + customer.getLevel().getStatus());
                             });
@@ -222,6 +244,32 @@ public class BankAccountApplication extends Application
                             
                             // Update level.
                             bottomValue.setText("LEVEL: " + customer.getLevel().getStatus());
+                            
+                        });
+                        
+                        logout.setOnAction(actiongetBalance -> 
+                        {
+                            // Disable all other fields
+                            enterValue.setDisable(true);
+                            send.setDisable(true);
+                            enterValue.setVisible(false);
+                            send.setVisible(false);
+                            currentValue.setDisable(true);
+                            currentValue.setVisible(false);
+                            depositMoney.setDisable(true);
+                            depositMoney.setVisible(false);
+                            withdrawMoney.setDisable(true);
+                            withdrawMoney.setVisible(false);
+                            purchase.setDisable(true);
+                            purchase.setVisible(false);
+                            getbalance.setDisable(true);
+                            getbalance.setVisible(false);
+                            logout.setDisable(true);
+                            logout.setVisible(false);
+                            bottomValue.setDisable(true);
+                            bottomValue.setVisible(false);
+                            
+                            
                             
                         });
                     }
@@ -252,6 +300,174 @@ public class BankAccountApplication extends Application
                 ManagerButton.setDisable(true);
                 ManagerButton.setVisible(false);
                 
+                // Make the username and password option
+                TextField username = new TextField();
+                username.setText("Username");
+                PasswordField password = new PasswordField();
+                password.setText("Password");
+                Label errorMessage = new Label("");
+                
+                Button enter = new Button("LOGIN");
+                
+                enter.setOnAction(action -> 
+                {
+                    
+                    // Create a new customer.
+                    managerAdmin = new Manager();
+                        
+                    // Log in if possible
+                    managerAdmin.login(username.getText(), password.getText());
+                    
+                    if(managerAdmin.getLoginSucess())
+                    {
+                        // The login  was sucessful so go on with the manager options.
+                        
+                        // First disable all the old items.
+                        username.setDisable(true);
+                        password.setDisable(true);
+                        errorMessage.setDisable(true);
+                        username.setVisible(false);
+                        password.setVisible(false);
+                        errorMessage.setVisible(false);
+                        enter.setDisable(true);
+                        enter.setVisible(false);
+                        
+                        
+                        // Create new buttons for the customer actions
+                        Button addCustomer = new Button("ADD CUSTOMER");
+                        Button deleteCustomer = new Button("DELETE CUSTOMER");
+                        Button logout = new Button("LOGOUT");
+                        
+                        enterValue = new TextField();
+                        TextField enterValue2 = new TextField();
+                        send = new Button("ENTER");
+                        currentValue = new Label("");
+                        
+                        // Disable the textfields and enter button for now.
+                        enterValue.setDisable(true);
+                        send.setDisable(true);
+                        enterValue.setVisible(false);
+                        send.setVisible(false);
+                        currentValue.setDisable(true);
+                        currentValue.setVisible(false);
+                        enterValue2.setDisable(true);
+                        enterValue2.setVisible(false);
+                        
+                        // Create a new border
+                        BorderPane border  = new BorderPane();
+                        HBox hbox = new HBox(addCustomer, deleteCustomer, logout);
+                        HBox bottom = new HBox(enterValue, enterValue2,send, currentValue);
+                        
+                        border.setTop(hbox);
+                        border.setLeft(bottom);
+                        Scene scene = new Scene(border, 800, 600);
+                        primaryStage.setScene(scene);
+                        primaryStage.show();
+                        
+                        // Set an action for each option.
+                        addCustomer.setOnAction(actionWithdrawMoney -> 
+                        {
+                            // First make the text values visible and enabled
+                            enterValue.setDisable(false);
+                            send.setDisable(false);
+                            enterValue.setVisible(true);
+                            send.setVisible(true);
+                            enterValue2.setDisable(false);
+                            enterValue2.setVisible(true);
+                            
+                            // Disable the text field
+                            currentValue.setDisable(true);
+                            currentValue.setVisible(false);
+                            
+                            // Change send back
+                            send.setText("ENTER");
+                            
+                            // Set a new text value for the texfields
+                            enterValue.setText("NEW USERNAME");
+                            enterValue2.setText("NEW PASSWORD");
+                            
+                            // Check if the enter button has been pressed.
+                            send.setOnAction(button  ->
+                            {
+                                // Add the customer as requested by the manager
+                                managerAdmin.addCustomer(enterValue.getText(), enterValue2.getText());
+                                
+                                // State that it has occured successfully.
+                                currentValue.setDisable(false);
+                                currentValue.setVisible(true);
+                                
+                                currentValue.setText("CUSTOMER ADDED SUCCESSFULLY");
+                                
+                            });
+                            
+                        });
+                        
+                        deleteCustomer.setOnAction(actionWithdrawMoney -> 
+                        {
+                            // First make the text values visible and enabled
+                            enterValue.setDisable(false);
+                            send.setDisable(false);
+                            enterValue.setVisible(true);
+                            send.setVisible(true);
+                            enterValue2.setDisable(false);
+                            enterValue2.setVisible(true);
+                            
+                            // Disable the text field
+                            currentValue.setDisable(true);
+                            currentValue.setVisible(false);
+                            
+                            // Set a new text value for the texfields
+                            enterValue.setText("USERNAME");
+                            enterValue2.setText("PASSWORD");
+                            
+                            send.setText("DELETE");
+                            // Check if the enter button has been pressed.
+                            send.setOnAction(button  ->
+                            {
+                                // Add the customer as requested by the manager
+                                managerAdmin.deleteCustomer(enterValue.getText(), enterValue2.getText());
+                                
+                                // State that it has occured successfully.
+                                currentValue.setDisable(false);
+                                currentValue.setVisible(true);
+                                
+                                currentValue.setText("CUSTOMER DELETED SUCCESSFULLY");
+                                
+                            });
+                            
+                            
+                        });
+                        
+                        logout.setOnAction(actionLogout ->
+                        {
+                            enterValue.setDisable(true);
+                            send.setDisable(true);
+                            enterValue.setVisible(false);
+                            send.setVisible(false);
+                            currentValue.setDisable(true);
+                            currentValue.setVisible(false);
+                            enterValue2.setDisable(true);
+                            enterValue2.setVisible(false);
+                            addCustomer.setDisable(true);
+                            addCustomer.setVisible(false);
+                            deleteCustomer.setDisable(true);
+                            deleteCustomer.setVisible(false);
+                            logout.setDisable(true);
+                            logout.setVisible(false);
+                        });
+                    }
+                    else
+                    {
+                        errorMessage.setText("LOGIN FAILED! PLEASE CHECK YOUR USERNAME/PASSWORD AGAIN!");
+                    }
+  
+                 
+                });    
+             
+                HBox hbox = new HBox(username,password, enter, errorMessage);
+                Scene scene = new Scene(hbox, 800, 600);
+                primaryStage.setScene(scene);
+                primaryStage.show();
                 
             }
         });

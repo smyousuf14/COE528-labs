@@ -14,7 +14,7 @@ public class Platinum extends Level
     /**
      * A default constructor for creating Platinum level objects.
      * 
-     * @Effects: Creates a Platinum Level object with default values.
+     * Effects: Creates a Platinum Level object with default values.
      */
     public Platinum()
     {
@@ -24,7 +24,7 @@ public class Platinum extends Level
     
     /**
      * 
-     * @Effects: Gets the status of this level.
+     * Effects: Gets the status of this level.
      */
     @Override
     public String getStatus()
@@ -34,7 +34,7 @@ public class Platinum extends Level
     
     /**
      * 
-     * @Effects: Gets the Fee of this level.
+     * Effects: Gets the Fee of this level.
      */
     @Override
     public int getFee()
@@ -45,7 +45,7 @@ public class Platinum extends Level
     /**
      * Set current Level to this level.
      * 
-     * @Effects: Sets the current level to this level.
+     * Effects: Sets the current level to this level.
      */
     @Override
     public void setLevel(Customer customer)

@@ -21,7 +21,7 @@ public class CustomerFile
     /**
      * Creates a CustomerFile with default values.
      * 
-     * @Effects: Creates a default value CustomerFile
+     * 
      */
     public CustomerFile(String username) throws FileNotFoundException
     {
@@ -42,7 +42,7 @@ public class CustomerFile
 
     /**
      * 
-     * @Effects: Gets the Username
+     * Effects: Gets the Username
      * @return the username
      */
     public String getUsername() 
@@ -51,7 +51,7 @@ public class CustomerFile
     }
 
     /**
-     * @Effects: Gets the password
+     * Effects: Gets the password
      * @return the password
      */
     public String getPassword() 
@@ -60,7 +60,7 @@ public class CustomerFile
     }
 
     /**
-     * @Effects: Get the role
+     * Effects: Get the role
      * @return the role
      */
     public String getRole() 
@@ -69,7 +69,7 @@ public class CustomerFile
     }
     
     /**
-     * @Effects: Get the Account Balance
+     * Effects: Get the Account Balance
      */
     public double getAccountBalance()
     {
@@ -77,7 +77,7 @@ public class CustomerFile
     }
     
     /**
-     * @Effects: Sets the account balance.
+     * Effects: Sets the account balance.
      */
     public void setAccountBalance(double accountBalance)
     {
@@ -87,7 +87,7 @@ public class CustomerFile
     // Other methods
     
     /**
-     * @Effects: Updates the account info instance variables.
+     * Effects: Updates the account info instance variables.
      */
     public void updateAccountInfo()
     {

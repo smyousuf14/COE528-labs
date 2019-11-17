@@ -4,7 +4,8 @@ import java.io.*;
 import java.util.Scanner;
 
 /**
- * A Manager manages the customer accounts in the bank application.
+ * Overview: A Manager manages the customer accounts in the bank application. This class is not 
+ * mutable since its contents cannot change.
  * 
  * @author Syed Yousuf
  */
@@ -22,7 +23,7 @@ public class Manager
      * A default constructor which creates a Manager which 
      * the specified values.
      * 
-     * @Effects: Creates an object of the Manager class with default constructor values.
+     * Effect: Creates an object of the Manager class with default constructor values.
      */
     public Manager()
     {
@@ -39,7 +40,7 @@ public class Manager
     /**
      * Gets the username of the manager.
      * 
-     * @Effects: Returns the username of this manager.
+     * Effects: Returns the username of this manager.
      * @return Username
      */
     public String getUsername()
@@ -50,7 +51,7 @@ public class Manager
     /**
      * Get the password.
      * 
-     * @Effects: Get the password of this Manager.
+     * Effects: Get the password of this Manager.
      * @return Password
      */
     public String getPassword()
@@ -61,7 +62,7 @@ public class Manager
     /**
      * Get the role.
      * 
-     * @Effects: Get the role of this manager.
+     * Effects: Get the role of this manager.
      * @return Role
      */
     public String getRole()
@@ -69,12 +70,20 @@ public class Manager
         return Role;
     }
     
+    /**
+     * Effects: Gets if the login was successful or not.
+     */
+    public boolean getLoginSucess()
+    {
+        return this.successfulLogin;
+    }
+    
     // Other important methods.
     
     /**
      * Logs in this manager object.
      * 
-     * @Effects: Checks if Login is possible and set success flag accordingly.
+     * Effects: Checks if Login is possible and set success flag accordingly.
      */
     public void login(String username, String password)
     {
@@ -92,7 +101,7 @@ public class Manager
     /**
      * Logs out this Manager object.
      * 
-     * @Effects: Sets the login flag to false.
+     * Effects: Sets the login flag to false.
      */
     public void logout()
     {
@@ -100,7 +109,7 @@ public class Manager
     }
     
     /**
-     * @Effects: Adds a customer.
+     * Adds a customer.
      * 
      * 
      */
@@ -142,17 +151,26 @@ public class Manager
     
     
     /**
-     * @Effects: Deletes a customer.
+     * Deletes a customer.
      * 
      * 
      */
-    public void deleteCustomer(Customer customer, String username)
+    public void deleteCustomer(String username, String password)
     {
         File Customer = new File("" + username + ".txt");
         Customer.delete();
         
         // Delete the object by giving it a null reference
-        customer = null;
+        //customer = null;
+    }
+    
+    /**
+     *  Converts an instance of this object into its String equivalent.
+     * 
+     */
+    public String toString()
+    {
+        return "" + this.Username + this.Password + this.Role;
     }
     
     public static void main(String[]args)
@@ -164,7 +182,7 @@ public class Manager
         
         Customer m2 = new Customer("Abdullah", "4321");
         
-        m.deleteCustomer(m2, "Abdullah");
+        //m.deleteCustomer(m2, "Abdullah");
         }
         catch(Exception e)
         {
