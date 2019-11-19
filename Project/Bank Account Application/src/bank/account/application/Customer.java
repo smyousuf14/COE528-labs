@@ -133,7 +133,7 @@ public class Customer
     /**
      * Add money to the customer's balance.
      * 
-     * Effects: Adds the specified amount of money to this customer's balance.
+     * Effects: Adds the specified amount of money to this customer's balance if sufficient funds exist.
      * Requires: money must be a positive value.
      * 
      */
@@ -176,8 +176,18 @@ public class Customer
      */
     public void useMoney(double money)
     {
-        // Check if the money is 50 dollars or more. 
-        if(money >= 50)
+        // Local Variables
+        boolean noSufficentFunds = false;
+        
+        // Check if there are sufficient funds.
+        if((AccountBalance - money - currentLevel.getFee()) < 0)
+        {
+            noSufficentFunds = true;
+        }
+
+        
+        // Check if the money is 50 dollars or more.     
+        if(money >= 50 && (noSufficentFunds == false))
         {
             
         
@@ -208,10 +218,6 @@ public class Customer
             }
         
         }
-        else
-        {
-            // If it isnt 50 dollars or more, then do nothing!
-        }
     }
     
     /**
@@ -222,30 +228,42 @@ public class Customer
      */
     public void withdrawMoney(double money)
     {
-        AccountBalance = AccountBalance - money;
+        // Local Variables
+        boolean noSufficentFunds = false;
         
-        // Update that info
-        customerFile.setAccountBalance(this.AccountBalance);
-        customerFile.updateAccountInfo();
+        // Check if there are sufficient funds.
+        if((AccountBalance - money) < 0)
+        {
+            noSufficentFunds = true;
+        }
         
-        // Checks to see if the customer's level has change or not.
-        if(AccountBalance < 10000)
+        if(noSufficentFunds == false)
         {
-            // Silver level.
-            currentLevel = new Silver();
-            
-        }
-        else
-        if(AccountBalance >= 10000 && AccountBalance < 20000)
-        {
-            // Gold Level.
-            currentLevel = new Gold();
-        }
-        else
-        if(AccountBalance >= 20000)
-        {
-            // Platinum Level.
-            currentLevel = new Platinum();
+            AccountBalance = AccountBalance - money;
+
+            // Update that info
+            customerFile.setAccountBalance(this.AccountBalance);
+            customerFile.updateAccountInfo();
+
+            // Checks to see if the customer's level has change or not.
+            if(AccountBalance < 10000)
+            {
+                // Silver level.
+                currentLevel = new Silver();
+
+            }
+            else
+            if(AccountBalance >= 10000 && AccountBalance < 20000)
+            {
+                // Gold Level.
+                currentLevel = new Gold();
+            }
+            else
+            if(AccountBalance >= 20000)
+            {
+                // Platinum Level.
+                currentLevel = new Platinum();
+            }
         }
     }
     
