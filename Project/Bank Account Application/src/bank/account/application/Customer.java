@@ -30,6 +30,9 @@ public class Customer
      * 
      * Effects: Creates a Customer account with zero balance.
      * Requires: username and password is not null
+     * 
+     * @param username The username of this customer
+     * @param password The password of this customer
      */
     public Customer(String username, String password) throws FileNotFoundException
     {
@@ -48,6 +51,8 @@ public class Customer
      * 
      * Effects: Creates a customer object with specified values.
      * Requires: accountBalance is a real number, not a String
+     * 
+     * @param accountBalance The account balance to initialize the customer with.
      */
     public Customer(double accountBalance)
     {
@@ -60,6 +65,8 @@ public class Customer
      * Get account balance.
      * 
      * Effects: Get the account balance.
+     * 
+     * @return gets the Account balance of this customer.
      */
     public double getAccountBalance()
     {
@@ -70,6 +77,8 @@ public class Customer
      * Get the level of this customer.
      * 
      * Effects: Get the level of this customer
+     * 
+     * @return gets the current level of this customer
      */
     public Level getLevel()
     {
@@ -80,6 +89,8 @@ public class Customer
      * Get the Customer File.
      * 
      * Effects: Get the customer file which has all the info for this customer.
+     * 
+     * @return gets the customer file of this customer
      */
     public CustomerFile getCustomerFile()
     {
@@ -90,6 +101,8 @@ public class Customer
      * Get the success rate.
      * 
      * Effects: Get if the log in was successful or not.
+     * 
+     * @return gets if the customer has successfully logged in or not.
      */
     public boolean getSuccessfulLogin()
     {
@@ -104,6 +117,9 @@ public class Customer
      * 
      * Effects: Checks if the username and password match and sets the success flag respectively.
      * Requires: username and password must not be null.
+     * 
+     * @param username The username of this customer to test
+     * @param password The password of this customer to test
      */
     public void login(String username, String password)
     {
@@ -134,7 +150,9 @@ public class Customer
      * Add money to the customer's balance.
      * 
      * Effects: Adds the specified amount of money to this customer's balance if sufficient funds exist.
-     * Requires: money must be a positive value.
+     * Requires: money must be a positive value. It must be a double value.
+     * 
+     * @param money The money to deposit into this customer bank account.
      * 
      */
     public void addMoney(double money)
@@ -173,6 +191,8 @@ public class Customer
      * 
      * Effects: Remove specified amount of money from this customer's balance by making a purchase.
      * Requires: money must be a positive value.
+     * 
+     * @param money The money to be used to make a purchase.
      */
     public void useMoney(double money)
     {
@@ -225,6 +245,8 @@ public class Customer
      * 
      * Effects: Withdraw specified money.
      * Requires: money must be a positive value
+     * 
+     * @param money The money that will be withdrawing from the account.
      */
     public void withdrawMoney(double money)
     {
@@ -272,7 +294,7 @@ public class Customer
      * 
      * Effects: Returns a string representation of this class
      * 
-     * @return A string representation
+     * @return A string representation of this class
      */
     @Override
     public String toString()
@@ -285,6 +307,7 @@ public class Customer
      * Checks if this class is represented properly.
      * 
      * Effect: Returns true if the class is represented properly, in other words if the account balance isn't null.
+     * @return Checks if the representation of this class is ok.
      */
     public boolean RepOk()
     {

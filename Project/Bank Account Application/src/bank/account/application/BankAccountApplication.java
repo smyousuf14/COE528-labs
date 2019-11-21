@@ -79,6 +79,7 @@ public class BankAccountApplication extends Application
                         errorMessage.setText("  An Account with that username or password does not exist! ");
                     }
                     
+                    
                     // Check if the customer has logged in successfully and if so lead them to the approprite screen.
                     if(customer.getSuccessfulLogin())
                     {
@@ -270,7 +271,12 @@ public class BankAccountApplication extends Application
                             bottomValue.setVisible(false);
                             
                             
+                            // Close this window and open a new window
+                            primaryStage.close();
                             
+                            BankAccountApplication a = new BankAccountApplication();
+                            a.start(new Stage());
+                           
                         });
                     }
                     else
@@ -455,6 +461,12 @@ public class BankAccountApplication extends Application
                             deleteCustomer.setVisible(false);
                             logout.setDisable(true);
                             logout.setVisible(false);
+                            
+                            // Close this window and open a new window
+                            primaryStage.close();
+                            
+                            BankAccountApplication a = new BankAccountApplication();
+                            a.start(new Stage());
                         });
                     }
                     else
